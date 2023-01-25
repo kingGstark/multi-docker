@@ -15,7 +15,7 @@ after_success:
   - docker build -t kinggstark/multi-server ./server
   - docker build -t kinggstark/multi-worker ./worker
   #push to dockerhub
-  - echo "$DOCKER_PASSWORD | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push -t kinggstark/multi-client
   - docker push -t kinggstark/multi-nginx
   - docker push -t kinggstark/multi-server
