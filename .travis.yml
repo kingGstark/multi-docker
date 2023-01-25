@@ -1,0 +1,16 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t kinggstark/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true kinggstark/react-test npm test
+
+after_success:
+  - docker build -t kinggstark/multi-client ./client
+  - docker build -t kinggstark/multi-nginx ./nginx
+  - docker build -t kinggstark/multi-server ./server
+  - docker build -t kinggstark/multi-worker ./worker
